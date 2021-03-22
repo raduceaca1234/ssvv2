@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.domain.Student;
+import org.example.domain.Tema;
 import org.example.service.Service;
 import org.junit.After;
 import org.junit.Before;
@@ -25,10 +26,12 @@ public class AppTest {
 
     TestBuilder testBuilder = new TestBuilder();
     Service service;
+    Service service2;
     @Before
     public void before() {
         testBuilder = new TestBuilder();
         service = testBuilder.getService();
+        service2 = testBuilder.getServiceAssignment();
     }
 
     @Test
@@ -65,17 +68,49 @@ public class AppTest {
         }
     }
 
+    @Test
+    public void test5(){
+        Tema tema = testBuilder.getAssignment();
+
+        service2.addTema(tema);
+
+        assertTrue(service2.findTema(tema.getID()).getID()
+                .equals(tema.getID()));
+    }
+
+    @Test
+    public void test6() {
+        Tema tema = testBuilder.getFaultyAssignment();
+        int count = getAssignmentsCount();
+        try {
+            service2.addTema(tema);
+        } catch (Exception exception) {
+            assertTrue(getAssignmentsCount().equals(count));
+        }
+    }
+
 
 
     @After
     public void afterTest(){
         service.deleteStudent(testBuilder.DEFAULT_ID);
+        service.deleteStudent(testBuilder.nrTema);
     }
 
     private Integer getStudentsCount() {
         AtomicReference<Integer> count = new AtomicReference<>(0);
 
         service.getAllStudenti().forEach(stud -> {
+            count.getAndSet(count.get() + 1);
+        });
+
+        return count.get();
+    }
+
+    private Integer getAssignmentsCount() {
+        AtomicReference<Integer> count = new AtomicReference<>(0);
+
+        service2.getAllTeme().forEach(stud -> {
             count.getAndSet(count.get() + 1);
         });
 

@@ -89,7 +89,54 @@ public class AppTest {
         }
     }
 
+    @Test
+    public void test7() {
+        testAssignmentWithNullId();
+        testAssignmentWithEmptyId();
+        testAssignmentWithEmptyDescription();
+        testAssignmentWithInvalidDeadline();
+        testAssignmentWithInvalidPrimire();
+    }
 
+    private void testAssignmentWithNullId() {
+        try {
+            service2.addTema(testBuilder.getAssignmentWithNullId());
+        } catch (Exception exception) {
+            assertTrue(getAssignmentsCount().equals(1));
+        }
+    }
+
+    private void testAssignmentWithEmptyId() {
+        try {
+            service2.addTema(testBuilder.getAssignmentWithEmptyId());
+        } catch (Exception exception) {
+            assertTrue(getAssignmentsCount().equals(1));
+        }
+    }
+
+    private void testAssignmentWithEmptyDescription() {
+        try {
+            service2.addTema(testBuilder.getAssignmentWithEmptyDescription());
+        } catch (Exception exception) {
+            assertTrue(getAssignmentsCount().equals(1));
+        }
+    }
+
+    private void testAssignmentWithInvalidDeadline() {
+        try {
+            service2.addTema(testBuilder.getAssignmentWithInvalidDeadline());
+        } catch (Exception exception) {
+            assertTrue(getAssignmentsCount().equals(1));
+        }
+    }
+
+    private void testAssignmentWithInvalidPrimire() {
+        try {
+            service2.addTema(testBuilder.getAssignmentWithInvalidPrimire());
+        } catch (Exception exception) {
+            assertTrue(getAssignmentsCount().equals(1));
+        }
+    }
 
     @After
     public void afterTest(){

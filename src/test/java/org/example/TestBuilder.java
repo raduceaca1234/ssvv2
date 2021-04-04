@@ -20,6 +20,31 @@ public class TestBuilder {
     public static String descriere = "Lorem ipsum";
     public static int deadline = 4;
     public static int primire = 1;
+    public static String EMPTY_STRING = "";
+    public static String NULL_STRING = null;
+    public static String empty_description = null;
+    public static int invalid_deadline = 0;
+    public static int invalid_primire = 0;
+
+    public Tema getAssignmentWithEmptyId() {
+        return new Tema(EMPTY_STRING, descriere, deadline, primire);
+    }
+
+    public Tema getAssignmentWithNullId() {
+        return new Tema(NULL_STRING, descriere, deadline, primire);
+    }
+
+    public Tema getAssignmentWithEmptyDescription() {
+        return new Tema(nrTema, empty_description, deadline, primire);
+    }
+
+    public Tema getAssignmentWithInvalidDeadline() {
+        return new Tema(nrTema, descriere, invalid_deadline, primire);
+    }
+
+    public Tema getAssignmentWithInvalidPrimire() {
+        return new Tema(nrTema, descriere, deadline, invalid_primire);
+    }
 
     //files
     public static String DEFAULT_STUDENT_XML_FILE = "testData/testStudentXMLFile.xml";

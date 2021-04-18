@@ -13,8 +13,8 @@ public class NotaValidator implements Validator<Nota> {
 
     /**
      * Class constructor
-     * @param studentFileRepository - ro.ubb.racheta.ro.ubb.org.example.repository student
-     * @param temaFileRepository - ro.ubb.racheta.ro.ubb.org.example.repository tema
+     * @param studentFileRepository - ro.ubb.racheta.repository student
+     * @param temaFileRepository - ro.ubb.racheta.repository tema
      */
     public NotaValidator(StudentXMLRepo studentFileRepository, TemaXMLRepo temaFileRepository) {
         this.studentFileRepository = studentFileRepository;

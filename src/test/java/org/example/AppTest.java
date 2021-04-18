@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.domain.Nota;
 import org.example.domain.Student;
 import org.example.domain.Tema;
 import org.example.service.Service;
@@ -27,11 +28,13 @@ public class AppTest {
     TestBuilder testBuilder = new TestBuilder();
     Service service;
     Service service2;
+    Service service3;
     @Before
     public void before() {
         testBuilder = new TestBuilder();
         service = testBuilder.getService();
         service2 = testBuilder.getServiceAssignment();
+        service3 = testBuilder.getServiceGrade();
     }
 
     @Test
@@ -98,6 +101,30 @@ public class AppTest {
         testAssignmentWithInvalidPrimire();
     }
 
+    @Test
+    public void test8(){
+        Student student = testBuilder.getStudent();
+
+        System.out.println(service3.addStudent(student));
+        System.out.println(student.getID());
+        assertTrue(service3.findStudent(student.getID()).getID()
+                .equals(student.getID()));
+
+        Tema tema = testBuilder.getAssignment();
+
+        service3.addTema(tema);
+
+        assertTrue(service3.findTema(tema.getID()).getID()
+                .equals(tema.getID()));
+
+        Nota nota = testBuilder.getGrade();
+
+        service3.addNota(nota, "Good work!");
+
+        assertTrue(service3.findNota(nota.getID()).getID()
+                .equals(nota.getID()));
+    }
+
     private void testAssignmentWithNullId() {
         try {
             service2.addTema(testBuilder.getAssignmentWithNullId());
@@ -140,8 +167,10 @@ public class AppTest {
 
     @After
     public void afterTest(){
-        service.deleteStudent(testBuilder.DEFAULT_ID);
-        service.deleteStudent(testBuilder.nrTema);
+        //service.deleteStudent(testBuilder.DEFAULT_ID);
+        //service3.deleteStudent(testBuilder.DEFAULT_ID);
+        //service3.deleteTema(testBuilder.nrTema);
+        //service3.deleteNota(testBuilder.id);
     }
 
     private Integer getStudentsCount() {
@@ -155,6 +184,16 @@ public class AppTest {
     }
 
     private Integer getAssignmentsCount() {
+        AtomicReference<Integer> count = new AtomicReference<>(0);
+
+        service2.getAllTeme().forEach(stud -> {
+            count.getAndSet(count.get() + 1);
+        });
+
+        return count.get();
+    }
+
+    private Integer getGradesCount() {
         AtomicReference<Integer> count = new AtomicReference<>(0);
 
         service2.getAllTeme().forEach(stud -> {

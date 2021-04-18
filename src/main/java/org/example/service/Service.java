@@ -35,11 +35,11 @@ public class Service {
 
     /**
      * Class Constructor
-     * @param studentFileRepository - ro.ubb.racheta.ro.ubb.org.example.repository student
+     * @param studentFileRepository - ro.ubb.racheta.repository student
      * @param studentValidator - validator student
-     * @param temaFileRepository - ro.ubb.racheta.ro.ubb.org.example.repository tema
+     * @param temaFileRepository - ro.ubb.racheta.repository tema
      * @param temaValidator - validator tema
-     * @param notaFileRepository - ro.ubb.racheta.ro.ubb.org.example.repository nota
+     * @param notaFileRepository - ro.ubb.racheta.repository nota
      * @param notaValidator - validator nota
      */
     //public Service(StudentFileRepository studentFileRepository, StudentValidator studentValidator, TemaFileRepository temaFileRepository, TemaValidator temaValidator, NotaFileRepository notaFileRepository, NotaValidator notaValidator) {
@@ -168,9 +168,6 @@ public class Service {
         if(predare != tema.getDeadline()){
             if (predare-tema.getDeadline() == 1){
                 nota.setNota(nota.getNota()-2.5);
-            }
-            else{
-                throw new ValidationException("Studentul nu mai poate preda aceasta tema!");
             }
         }
         notaFileRepository.save(nota);

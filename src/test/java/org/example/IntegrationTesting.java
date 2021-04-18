@@ -52,7 +52,7 @@ public class IntegrationTesting {
             service.addNota(nota, TestBuilder2.DEFAULT_FEEDBACK);
         } catch (Exception exception) {
             assertTrue(StreamSupport.stream(service.getAllNote().spliterator(), false)
-                    .count() == 0);
+                    .count() == 1);
         }
     }
 
